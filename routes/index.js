@@ -8,6 +8,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Quiz' });
 });
 
+router.get('/author', function(req, res, next) {
+  res.render('author', { author: 'Tirzo A. Curiel M.', photo: 'I.CurielTirzo.jpg' });
+});
+
+//router.get('/author');
 router.get('/quizes/question', quizController.question);
 router.get('/quizes/answer', quizController.answer);
 
