@@ -12,6 +12,9 @@ router.get('/author', function(req, res, next) {
   res.render('author', { author: 'Tirzo A. Curiel M.', photo: 'I.CurielTirzo.jpg' });
 });
 
+// Autoload de comandos con :quizId
+router.param('quizId', quizController.load);	// autoload :quizId
+
 // Definición de rutas de /quizes
 //router.get('/author');
 // router.get('/quizes/question', quizController.question);
