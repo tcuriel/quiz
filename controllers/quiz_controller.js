@@ -2,7 +2,7 @@ var models = require('../models/models.js');
 
 // Autoload - factoriza el código si ruta incluye :quizId
 exports.load = function(req, res, next, quizId){
-  models.Quiz.findById(quizId).then(
+  /*models.Quiz.findById(quizId).then(
     function(quiz){
 	  if(quiz){
 	    req.quiz = quiz;
@@ -14,7 +14,23 @@ exports.load = function(req, res, next, quizId){
 	    next(newError); 
 	  }
 	}
-  ).catch(function(error){next(error);});
+	
+  models.Quiz.findById(2).then(
+    function(quiz){
+	  models.Quiz.destroy().then(function(2) {
+        if (u && u.deletedAt) {
+          console.log('// successfully deleted the project');
+        }
+      })
+    }
+	
+  ).catch(function(error){next(error);});*/
+  
+  models.Quiz.destroy({
+    where: {
+       id: 3
+    }
+})
 };
 
 // GET /quizes
