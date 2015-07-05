@@ -2,7 +2,7 @@ var models = require('../models/models.js');
 
 // Autoload - factoriza el código si ruta incluye :quizId
 exports.load = function(req, res, next, quizId){
-  /*models.Quiz.findById(quizId).then(
+  models.Quiz.findById(quizId).then(
     function(quiz){
 	  if(quiz){
 	    req.quiz = quiz;
@@ -13,29 +13,31 @@ exports.load = function(req, res, next, quizId){
 	    var newError = new Error(menssageError);
 	    next(newError); 
 	  }
-	}
-	
-  models.Quiz.findById(2).then(
+	}	
+  ).catch(function(error){next(error);});
+  
+    /*models.Quiz.findById(2).then(
     function(quiz){
 	  models.Quiz.destroy().then(function(2) {
         if (u && u.deletedAt) {
           console.log('// successfully deleted the project');
         }
       })
-    }
+    }*/
 	
-  ).catch(function(error){next(error);});*/
-  
-  models.Quiz.destroy({
+  /*models.Quiz.destroy({
     where: {
        id: 3
     }
-})
+  })*/
+  
 };
 
 // GET /quizes
 exports.index = function(req, res){
-  models.Quiz.findAll().then(
+  var quizString = '%' + req.query.search + '%'
+  quizString = quizString.replace(' ','%');
+  models.Quiz.findAll({where: ["pregunta like ?", quizString]}).then(
     function(quizes){
       res.render('quizes/index.ejs',{ quizes: quizes});
     }
