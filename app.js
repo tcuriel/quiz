@@ -43,6 +43,22 @@ app.use(function(req, res, next){
   next();
 });
 
+//
+app.use( function(req, res, next) {
+  console.log('req.session.timer: ' + req.session.timer);
+  if (req.session.timer) {
+	var ahora = new Date().getTime();
+	var limite = 120000; // 2 minutos (2* 60 * 1000 = 120000)
+	if ( ahora - req.session.timer > limite ) {
+	  delete req.session.timer;
+	  res.redirect("/logout");
+	} else {
+	  req.session.timer = ahora;
+	}
+  }
+  next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
